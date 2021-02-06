@@ -9,7 +9,7 @@ import static com.futurebytedance.sparsearray.student.SparseArrayUtil.*;
  * @date 2021/2/4 - 23:49
  * @Description 二维数组 --> 稀疏数组 封装性
  */
-public class MySparseArray {
+public class SparseArray {
     public static void main(String[] args) {
         //创建一个原始的二维数组 11*11
         //0：表示没有棋子 1：表示黑子 2：表示蓝子
