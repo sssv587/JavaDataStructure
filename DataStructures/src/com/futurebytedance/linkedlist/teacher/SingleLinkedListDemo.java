@@ -1,5 +1,7 @@
 package com.futurebytedance.linkedlist.teacher;
 
+import java.util.Stack;
+
 /**
  * @author yuhang.sun
  * @version 1.0
@@ -29,14 +31,120 @@ public class SingleLinkedListDemo {
         singleLinkedList.addByOrder(hero2);
         singleLinkedList.addByOrder(hero1);
 
+        //单链表的反转功能
+//        singleLinkedList.list();
+//        reverseList(singleLinkedList.getHead());
+        singleLinkedList.list();
+
+        //逆序打印单链表
+        reversePrint(singleLinkedList.getHead());
+
         //修改节点
-        HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟~~");
-        singleLinkedList.update(newHeroNode);
+//        HeroNode newHeroNode = new HeroNode(2, "小卢", "玉麒麟~~");
+//        singleLinkedList.update(newHeroNode);
 
         //删除一个节点
-        singleLinkedList.del(1);
+//        singleLinkedList.del(1);
 
-        singleLinkedList.list();
+//        singleLinkedList.list();
+
+        //求单链表中的有效节点的个数
+//        int length = getLength(singleLinkedList.getHead());
+//        System.out.println("有效节点个数为:" + length);
+
+        //查找单链表中的倒数第K个结点
+//        HeroNode lastIndexNode = findLastIndexNode(singleLinkedList.getHead(), 3);
+//        System.out.println(lastIndexNode);
+    }
+
+    //方式2：
+    //可以利用栈这个数据结构，将各节点压入到栈中，然后利用栈的先进后出的特点，就实现了逆序打印的效果
+    public static void reversePrint(HeroNode head) {
+        if (head.next == null) {
+            return;//空链表，不做打印
+        }
+        //创建一个栈，将各节点压入栈
+        Stack<HeroNode> stack = new Stack<>();
+        HeroNode cur = head.next;
+        //将链表的各节点压入栈
+        while (cur != null) {
+            stack.push(cur);
+            cur = cur.next;//cur后移，这样就可以压入下一个节点
+        }
+        //将栈中的节点进行打印
+        while (stack.size() > 0) {
+            System.out.println(stack.pop());//stack的特点是先进后出
+        }
+    }
+
+    //将单链表反转
+    public static void reverseList(HeroNode head) {
+        //如果当前链表为空，或者只有一个节点，无需反转，直接返回
+        if (head.next == null || head.next.next == null) {
+            return;
+        }
+
+        //定义一个辅助指针(变量)，帮助我们遍历原来的链表
+        HeroNode cur = head.next;
+        HeroNode next = null;//指向当前节点[cur]的下一个节点
+        HeroNode reverseHead = new HeroNode(0, "", "");
+        //遍历原来的链表，每遍历一个节点，就将其取出，并放在新的链表的reverseHead的最前端
+        while (cur != null) {
+            next = cur.next;//先暂时保存当前节点的下一个节点，因为后面需要使用
+            cur.next = reverseHead.next;//将cur的下一个节点指向新的链表的最前端
+            reverseHead.next = cur;//将cur连接到新的链表上
+            cur = next;//让cur后移
+        }
+        //将head.next 指向reverseHead.next,实现单链表的反转
+        head.next = reverseHead.next;
+    }
+
+    //查找单链表中的倒数第k个结点【新浪面试题】
+    //思路
+    //1.编写一个方法，接收head结点，同时接收一个index
+    //2.index表示是倒数第index个结点
+    //3.先把链表从头到尾遍历一遍，的到链表的总得长度getLength
+    //4.得到size后，我们从链表的第一个开始遍历(size-index)个，就可以得到
+    //5.如果找到了，则返回该节点，否则返回null
+    public static HeroNode findLastIndexNode(HeroNode head, int index) {
+        //如果链表为空，返回null
+        if (head.next == null) {
+            return null;//没有找到
+        }
+        //第一个遍历得到链表的长度（节点个数）
+        int size = getLength(head);
+        //第二次遍历 size - index 位置，就是我们倒数的第K个结点
+        //先做一个index的校验
+        if (index <= 0 || index > size) {
+            return null;
+        }
+        //定义辅助变量,for循环定位到倒数的index
+        HeroNode cur = head.next;
+        for (int i = 0; i < size - index; i++) {
+            cur = cur.next;
+        }
+        return cur;
+    }
+
+
+    //方法：获取到单链表的节点的个数（如果是带头节点的链表，需要不统计头结点）
+
+    /**
+     * @param head 链表的头结点
+     * @return 返回的就是有效节点的个数
+     */
+    public static int getLength(HeroNode head) {
+        if (head.next == null) {
+            return 0;
+        }
+        int length = 0;
+        //定义一个辅助的变量
+        HeroNode cur = head.next;
+        while (cur != null) {
+            length++;
+            cur = cur.next;//遍历
+        }
+        return length;
     }
 }
 
@@ -44,6 +152,10 @@ public class SingleLinkedListDemo {
 class SingleLinkedList {
     //先初始化一个头结点,头结点不要动,不存放具体数据
     private final HeroNode head = new HeroNode(0, "", "");
+
+    public HeroNode getHead() {
+        return head;
+    }
 
     //添加节点到单向链表
     //思路：当不考虑编号的顺序时
