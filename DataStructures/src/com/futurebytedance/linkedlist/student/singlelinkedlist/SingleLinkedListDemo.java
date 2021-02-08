@@ -1,4 +1,4 @@
-package com.futurebytedance.linkedlist.student;
+package com.futurebytedance.linkedlist.student.singlelinkedlist;
 
 import java.util.Stack;
 
