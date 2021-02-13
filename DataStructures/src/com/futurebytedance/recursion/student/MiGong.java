@@ -54,7 +54,7 @@ public class MiGong {
 
     //判断下一个路径是否可以走
     public static boolean canMove(int i, int j, int targetI, int targetJ) {
-        if (targetI < 0 || targetJ < 0 || targetI >= maxLine || targetJ > maxRow) {
+        if (targetI < 0 || targetJ < 0 || targetI >= maxLine || targetJ >= maxRow) {
             return false;
         }
         if (arr[targetI][targetJ] == 1) {

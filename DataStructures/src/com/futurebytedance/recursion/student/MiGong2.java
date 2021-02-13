@@ -75,12 +75,8 @@ public class MiGong2 {
             return false;
         }
         //避免在两个空格间来回走
-        if (array[targetI][targetJ] == 5) {
-//            System.out.println("来回走，失败了");
-            return false;
-        }
-
-        return true;
+        //System.out.println("来回走，失败了");
+        return array[targetI][targetJ] != 5;
     }
 
     private void print() {
