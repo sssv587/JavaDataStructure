@@ -17,15 +17,22 @@ public class BubbleSort {
 
     public static void bubbleSort(int[] arr) {
         int temp;
+        boolean flag = false;
         //外层循环控制趟数
         //内层循环控制比较次数
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - 1 - i; j++) {
                 if (arr[j] > arr[j + 1]) {
+                    flag = true;
                     temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                 }
+            }
+            if (flag) {
+                flag = false;
+            } else {
+                break;
             }
         }
     }
