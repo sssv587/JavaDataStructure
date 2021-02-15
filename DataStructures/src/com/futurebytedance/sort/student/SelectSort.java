@@ -18,7 +18,7 @@ public class SelectSort {
     public static void selectSort(int[] arr) {
         //选择排序
         //外层循环控制要放置的位置
-        //内层循环控制寻找从0开始的最小值
+        //内层循环控制寻找从i+1开始的最小值
         for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
             int min = arr[i];
