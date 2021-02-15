@@ -36,7 +36,7 @@ public class BubbleSort {
         System.out.println(Arrays.toString(arr));
         Date date2 = new Date();
         String date2Str = simpleDateFormat.format(date2);
-        System.out.println("排序前的时间是:" + date2Str);
+        System.out.println("排序后的时间是:" + date2Str);
 
 //
 //        //第二趟排序，就是将第二大的数排在倒数第二位
