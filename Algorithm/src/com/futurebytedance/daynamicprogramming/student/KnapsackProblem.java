@@ -1,7 +1,5 @@
 package com.futurebytedance.daynamicprogramming.student;
 
-import java.util.Arrays;
-
 /**
  * @author yuhang.sun
  * @version 1.0
